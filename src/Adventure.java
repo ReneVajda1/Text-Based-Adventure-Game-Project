@@ -37,6 +37,10 @@ public class Adventure {
         boolean goblinKilled = false;
         boolean goblinKicked = false;
 
+
+
+        //
+
         // Navigation variables
         int forwardCount = 0;
 
@@ -102,7 +106,7 @@ public class Adventure {
             }
 
             // Friendly Goblin logic
-            if (rand.nextInt(100) < 6 && !goblinKilled) {
+            if (rand.nextInt(100) < 5 && !goblinKilled) {
                 System.out.println("----------------------------------------------");
                 if (!goblinKicked) {
                     System.out.println("A 'Friendly Goblin' appears and asks you for a torch!");
@@ -151,8 +155,11 @@ public class Adventure {
                 continue;
             }
 
-            // Mysterious woman logic
-            if (rand.nextInt(100) < 6) {
+
+
+
+            // Mysterious woman lompa
+            if (rand.nextInt(100) < 5) {
                 System.out.println("----------------------------------------------");
                 System.out.println("A mysterious door appears in the wall, and a beautiful woman beckons you inside.");
                 System.out.println("She whispers, 'There is a shortcut this way. Just come closer...'");
@@ -162,16 +169,85 @@ public class Adventure {
                 String womanChoice = in.nextLine();
                 if (womanChoice.equals("1")) {
                     System.out.println("You step closer. Her forked tongue flicks as she licks her lips...");
-                    System.out.println("She bites into your throat! You collapse...");
-                    break Game;
-                } else if (womanChoice.equals("2")) {
-                    System.out.println("You swing your torch at her!");
-                    System.out.println("She hisses and screams, and the door vanishes.");
-                } else {
-                    System.out.println("The mysterious door vanishes into the darkness.");
+
+
+                    if (rand.nextInt(100) < 100) {
+                        System.out.println("----------------------------------------------");
+                        System.out.println("1. Go closer");
+                        System.out.println("2. Swing your torch");
+
+                        String womanChoice2 = in.nextLine();
+                        if (womanChoice2.equals("1")) {
+                            System.out.println("...from now you can see her pale face better and she is smiling at you");
+
+
+                            if (rand.nextInt(100) < 100) {
+                                System.out.println("----------------------------------------------");
+                                System.out.println("1. Go closer");
+                                System.out.println("2. Swing your torch");
+
+                                String womanChoice3 = in.nextLine();
+                                if (womanChoice3.equals("1")) {
+                                    System.out.println("You step closer. Her forked tongue flicks as she licks her lips...");
+                                    System.out.println("She bites into your throat! You collapse...");
+                                    game:
+                                    break;
+                                } else if (womanChoice3.equals("2")) {
+                                    System.out.println("You swing your torch at her!");
+                                    System.out.println("She hisses and screams, and the door vanishes.");
+                                } else {
+                                    System.out.println("The mysterious door vanishes into the darkness.");
+                                }
+                                continue;
+
+                            } else if (womanChoice2.equals("2")) {
+                                System.out.println("You swing your torch at her!");
+                                System.out.println("She hisses and screams, and the door vanishes.");
+                            } else {
+                                System.out.println("The mysterious door vanishes into the darkness.");
+                            }
+                            continue;
+
+
+                        } else if (womanChoice.equals("2")) {
+                            System.out.println("You swing your torch at her!");
+                            System.out.println("She hisses and screams, and the door vanishes.");
+                        } else {
+                            System.out.println("The mysterious door vanishes into the darkness.");
+                        }
+                        continue;
+                    }
+                }
+            }
+
+
+
+            // Magical cat mnauky
+            if (rand.nextInt(100)<5) {
+                System.out.println("----------------------------------------------");
+                System.out.println("A Mysterious magical cat is had appeared.. its glowing.. curled up, and blocks your path");
+                System.out.println("MEEEEEEEEEEEOW ");
+                System.out.println("1. Pet the cat");
+                System.out.println("2. Ignore the cat");
+                System.out.println("3. Attack the cat");
+
+                String catChoice = in.nextLine();
+
+                if (catChoice.equals("1")) {
+                    System.out.println("Cat's magical powers restored your strenght you have gained 50hp");
+                    heroHealth += 50;
+
+                } else if (catChoice.equals("2")) {
+                    System.out.println("Cat is not to be ignored.. Cat scratches you causing 20 damage");
+                    System.out.println("Glowing cat had disapeared.");
+                    heroHealth -= 20;
+
+                } else if (catChoice.equals("3")) {
+                    System.out.println("Cat runs away ");
                 }
                 continue;
             }
+
 
             // Navigation logic
             System.out.println("----------------------------------------------");
@@ -211,9 +287,71 @@ public class Adventure {
                 if (forwardCount == 3) {
                     System.out.println("You have entered the Necromancer's room!");
                     System.out.println("Prepare for the ultimate fight!");
-                    // Necromancer fight logic here...
+
+                    // Boss fight
+                    int bossHealth = 200;
+                    int bossAttackDamage = 35;
+
+                    while (bossHealth > 0) {
+                        System.out.println("Necromancer's HP: " + bossHealth);
+                        System.out.println("Your HP: " + heroHealth);
+                        System.out.println("1. Attack");
+                        System.out.println("2. Drink health potion");
+
+                        String bossInput = in.nextLine();
+
+                        if (bossInput.equals("1")) {
+                            if (!hasMagicSword) {
+                                System.out.println("You don't have the Magic Sword. The boss kills you!");
+                                break Game;
+                            }
+
+                            int damageDealt = rand.nextInt(heroAttackDamage) + 20; // Bonus damage for magic sword
+                            int damageTaken = rand.nextInt(bossAttackDamage);
+
+                            bossHealth -= damageDealt;
+                            heroHealth -= damageTaken;
+
+                            System.out.println("You strike the boss for " + damageDealt + " damage.");
+                            System.out.println("The boss retaliates for " + damageTaken + " damage!");
+
+                            if (heroHealth <= 0) {
+                                System.out.println("A wave of suffocating darkness envelops you, stealing the last breath from your lungs.");
+                                System.out.println("Your vision fades as the Necromancer whispers, 'Your soul is mine now, to torment for all eternity.'");
+                                System.out.println("You collapse to the cold, unyielding floor, and the Necromancer's laughter echoes endlessly...");
+                                System.out.println("GAME OVER.");
+                                break Game;
+                            }
+
+                        } else if (bossInput.equals("2")) {
+                            if (numHealthPotions > 0) {
+                                heroHealth += healthPotionHealAmount;
+                                numHealthPotions--;
+                                System.out.println("You drink a health potion, healing yourself for " + healthPotionHealAmount);
+                                System.out.println("Your HP: " + heroHealth);
+                                System.out.println("Health potions left: " + numHealthPotions);
+                            } else {
+                                System.out.println("You have no health potions left!");
+                            }
+                        } else {
+                            System.out.println("Invalid command.");
+                        }
+                    }
+
+                    if (bossHealth <= 0) {
+                        System.out.println("You have defeated the boss!");
+                        if (!hasKey) {
+                            System.out.println("You need a key to escape the dungeon!");
+                        } else {
+                            System.out.println("You use the key to escape the dungeon. Congratulations!");
+                            break Game;
+                        }
+                    }
                 }
-            } else if (navigation.equals("1") || navigation.equals("2")) {
+            }
+
+
+            else if (navigation.equals("1") || navigation.equals("2")) {
                 System.out.println("You move cautiously...");
                 int enemyHealth = rand.nextInt(maxEnemyHealth);
                 String enemy = enemies[rand.nextInt(enemies.length)];
