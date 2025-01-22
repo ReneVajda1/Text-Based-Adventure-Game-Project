@@ -220,6 +220,50 @@ public class Adventure {
                 }
             }
 
+            // Wandering Spirit Encounter
+            if (rand.nextInt(100) < 5) {
+                System.out.println("----------------------------------------------");
+                System.out.println("A ghostly figure materializes before you, its translucent form flickering in the dim light.");
+                System.out.println("It whispers, 'Mortal, heed my words... Choose wisely, for the veil is thin.'");
+                System.out.println("1. Listen to the spirit's whispers");
+                System.out.println("2. Attack the spirit");
+                System.out.println("3. Walk away");
+
+                String spiritChoice = in.nextLine();
+
+                if (spiritChoice.equals("1")) {
+                    System.out.println("The spirit whispers secrets of the dungeon...");
+                    if (rand.nextInt(100) < 50) {
+                        System.out.println("The spirit blesses you with knowledge of a hidden treasure!");
+                        System.out.println("You gain a key and feel stronger (+20 HP).");
+                        hasKey = true;
+                        heroHealth += 20;
+                    } else {
+                        System.out.println("The spirit's whispers twist into screams, and you feel your strength draining...");
+                        System.out.println("You lose 15 HP.");
+                        heroHealth -= 15;
+                    }
+                } else if (spiritChoice.equals("2")) {
+                    System.out.println("You swing your weapon at the spirit!");
+                    if (rand.nextInt(100) < 50) {
+                        System.out.println("Your weapon strikes true, and the spirit dissipates, leaving behind a glowing orb!");
+                        System.out.println("You gain 1 health potion.");
+                        numHealthPotions++;
+                    } else {
+                        System.out.println("Your weapon passes through the spirit, and its hollow eyes stare into your soul...");
+                        System.out.println("You feel a chilling pain as it curses you (-10 HP).");
+                        heroHealth -= 10;
+                    }
+                } else if (spiritChoice.equals("3")) {
+                    System.out.println("You decide to leave the spirit undisturbed.");
+                    System.out.println("The spirit watches silently as you walk away, fading back into the darkness.");
+                } else {
+                    System.out.println("Invalid choice. The spirit fades away, leaving you alone in the dungeon.");
+                }
+
+                continue; 
+            }
+
 
 
             // Magical cat mnauky
