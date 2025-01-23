@@ -220,7 +220,7 @@ public class Adventure {
                 }
             }
 
-            // Wandering Spirit Encounter
+            // Wandering spirit
             if (rand.nextInt(100) < 5) {
                 System.out.println("----------------------------------------------");
                 System.out.println("A ghostly figure materializes before you, its translucent form flickering in the dim light.");
@@ -261,7 +261,7 @@ public class Adventure {
                     System.out.println("Invalid choice. The spirit fades away, leaving you alone in the dungeon.");
                 }
 
-                continue; 
+                continue;
             }
 
 
